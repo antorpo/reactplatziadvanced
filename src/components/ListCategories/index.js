@@ -4,16 +4,15 @@ import { Category } from '../Category'
 import { List, Item } from './styles'
 import { categories as categoriesEndPoint } from '../../../endpoints.json'
 
-export const ListCategories = () => {
+// Crecion de un custom-hook:
+const useCategoriesData = () => {
   const [categories, setCategories] = useState({
     data: [],
     loading: true,
     error: null
   })
 
-  const [showFixed, setShowFixed] = useState(false)
-
-  // // Sin usar async/await por problemas con Babel 7.
+  // Sin usar async/await por problemas con Babel 7.
   useEffect(() => {
     setCategories({
       loading: true,
@@ -35,8 +34,15 @@ export const ListCategories = () => {
     }
   }, []) // El array vacio le indica que solo se llamara al montarse el componente es decir el primer renderizado. (componentDidMount)
 
+  return { categories }
+}
+
+export const ListCategories = () => {
+  const { categories } = useCategoriesData()
+  const [showFixed, setShowFixed] = useState(false)
+
   useEffect(() => {
-    const onScroll = e => {
+    const onScroll = (e) => {
       // Cuando el scroll pase la posicion de 200
       const newShowFixed = window.scrollY > 200
 
@@ -57,7 +63,7 @@ export const ListCategories = () => {
   }
 
   const renderList = (fixed) => (
-    <List className={fixed ? 'fixed' : ''}>
+    <List fixed={fixed}>
       {categories.data.map((_category) => (
         <Item key={_category.id}>
           <Category {..._category} />

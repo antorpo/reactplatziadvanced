@@ -11,6 +11,8 @@ export const ListCategories = () => {
     error: null
   })
 
+  const [showFixed, setShowFixed] = useState(false)
+
   // // Sin usar async/await por problemas con Babel 7.
   useEffect(() => {
     setCategories({
@@ -33,6 +35,19 @@ export const ListCategories = () => {
     }
   }, []) // El array vacio le indica que solo se llamara al montarse el componente es decir el primer renderizado. (componentDidMount)
 
+  useEffect(() => {
+    const onScroll = e => {
+      // Cuando el scroll pase la posicion de 200
+      const newShowFixed = window.scrollY > 200
+
+      showFixed !== newShowFixed && setShowFixed(newShowFixed)
+    }
+
+    document.addEventListener('scroll', onScroll)
+
+    return () => document.removeEventListener('scroll', onScroll)
+  }, [showFixed])
+
   if (categories.loading) {
     return <h3>Loading...</h3>
   }
@@ -41,13 +56,20 @@ export const ListCategories = () => {
     return <h3>{`Error: ${categories.error}`}</h3>
   }
 
-  return (
-    <List>
+  const renderList = (fixed) => (
+    <List className={fixed ? 'fixed' : ''}>
       {categories.data.map((_category) => (
         <Item key={_category.id}>
           <Category {..._category} />
         </Item>
       ))}
     </List>
+  )
+
+  return (
+    <>
+      {renderList()}
+      {showFixed && renderList(true)}
+    </>
   )
 }

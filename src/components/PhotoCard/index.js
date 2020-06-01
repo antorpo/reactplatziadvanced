@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Article, ImgWrapper, Img, Button } from './styles'
 import { MdFavoriteBorder } from 'react-icons/md'
 

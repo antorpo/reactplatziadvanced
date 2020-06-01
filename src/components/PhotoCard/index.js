@@ -1,12 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Article, ImgWrapper, Img, Button } from './styles'
-import { MdFavoriteBorder } from 'react-icons/md'
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
 
 const DEFAULT_IMAGE =
   'https://res.cloudinary.com/midudev/image/upload/w_300/q_80/v1560262103/dogs.png'
 
 export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
   const [show, setShow] = useState(false)
+  const key = `like-${id}`
+  const [liked, setLiked] = useState(() => {
+    try {
+      // Usamos try-catch ya que algunos navegadores al usar modo incognito no permiten escribir/leer el localStorage.
+      const like = window.localStorage.getItem(key)
+      return like
+    } catch (e) {
+      // En caso de un fallo devolvemos false.
+      return false
+    }
+  })
 
   /*
     ref es una prop de React que nos va a permitir capturar un elemento del DOM
@@ -15,7 +26,7 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
   const element = useRef(null)
 
   useEffect(() => {
-    /* 
+    /*
       Con la condicion del ternario miramos si el navegador soporta IntersectionObserver, en caso de hacerlo
       lo devolvemos en caso contrario utilizamos la libreria (polyfill) que automaticamente le llena la opcion a window
       todo esto dentro de Promise.resolve() que nos permite crear una promesa.
@@ -52,6 +63,19 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
 
     Esto es un estilo de lazy-load (carga perezosa).
   */
+
+  const Icon = liked ? MdFavorite : MdFavoriteBorder
+
+  // Guardamos datos en el localStorage.
+  const setLocalStorage = (value) => {
+    try {
+      window.localStorage.setItem(key, value)
+      setLiked(value)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   return (
     <Article ref={element}>
       {show && (
@@ -62,8 +86,8 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
             </ImgWrapper>
           </a>
 
-          <Button>
-            <MdFavoriteBorder size='25px' /> {likes} likes!
+          <Button onClick={() => setLocalStorage(!liked)}>
+            <Icon size='25px' /> {likes} likes!
           </Button>
         </>
       )}

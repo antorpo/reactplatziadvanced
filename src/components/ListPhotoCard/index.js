@@ -1,12 +1,21 @@
 import React from 'react'
 import { PhotoCard } from '../PhotoCard'
+import { withPhotos } from '../../hoc/withPhotos'
 
-export const ListPhotoCard = ({ photocards = [1, 2, 3, 4] }) => (
+const ListPhotoCardComponent = ({ data: { photos = [] } } = {}) => (
   <ul>
-    {photocards.map((_photocard) => (
-      <li key={_photocard}>
-        <PhotoCard id={_photocard} />
+    {photos.map((_photocard) => (
+      <li key={_photocard.id}>
+        <PhotoCard {..._photocard} />
       </li>
     ))}
   </ul>
 )
+
+/*
+      HOC (High Order Components)
+      Componentes de orden superior:
+      Funciones que reciben como parametro un component y devuelve otro componente con mejoras
+      o con props inyectados.
+*/
+export const ListPhotoCard = withPhotos(ListPhotoCardComponent)

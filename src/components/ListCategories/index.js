@@ -51,6 +51,7 @@ export const ListCategories = () => {
 
     document.addEventListener('scroll', onScroll)
 
+    // Dentro de un efecto podemos devolver funciones para limpiarlo.
     return () => document.removeEventListener('scroll', onScroll)
   }, [showFixed])
 

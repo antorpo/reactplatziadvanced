@@ -1,8 +1,7 @@
 import React from 'react'
 import { PhotoCard } from '../PhotoCard'
-import { withPhotos } from '../../hoc/withPhotos'
 
-const ListPhotoCardComponent = ({ data: { photos = [] } } = {}) => (
+export const ListPhotoCardComponent = ({ data: { photos = [] } } = {}) => (
   <ul>
     {photos.map((_photocard) => (
       <li key={_photocard.id}>
@@ -18,4 +17,3 @@ const ListPhotoCardComponent = ({ data: { photos = [] } } = {}) => (
       Funciones que reciben como parametro un component y devuelve otro componente con mejoras
       o con props inyectados.
 */
-export const ListPhotoCard = withPhotos(ListPhotoCardComponent)

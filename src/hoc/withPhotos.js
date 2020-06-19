@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 
 // HOC => High Order Component
 // Query para obtener las fotos:
-export const withPhotos = graphql(gql`
+const GET_PHOTOS = gql`
   query getPhotos($categoryId: ID) {
     photos(categoryId: $categoryId) {
       id
@@ -14,4 +14,6 @@ export const withPhotos = graphql(gql`
       liked
     }
   }
-`)
+`
+
+export const withPhotos = graphql(GET_PHOTOS)

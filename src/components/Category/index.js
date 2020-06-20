@@ -1,5 +1,5 @@
 import React from 'react'
-import { Anchor, Image } from './styles'
+import { Link, Image } from './styles'
 
 const DEFAULT_IMG = 'https://i.imgur.com/dJa0Hpl.jpg'
 
@@ -7,12 +7,12 @@ const DEFAULT_IMG = 'https://i.imgur.com/dJa0Hpl.jpg'
  debemos desestructurar. */
 export const Category = ({
   cover = DEFAULT_IMG,
-  path,
+  path = '#',
   emoji = '?',
   name = ''
 }) => (
-  <Anchor href={path}>
+  <Link to={path}>
     <Image src={cover} alt={name} />
     {emoji}
-  </Anchor>
+  </Link>
 )

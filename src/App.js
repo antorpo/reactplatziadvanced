@@ -4,6 +4,7 @@ import { Home } from './pages/Home'
 import { Detail } from './pages/Detail'
 import { GlobalStyle } from './styles/globalStyles'
 import { Router } from '@reach/router'
+import { NavBar } from './components/NavBar'
 
 const App = () => {
   // Obtener parametros usando QueryString y URLParams
@@ -19,6 +20,7 @@ const App = () => {
         <Home path='/pet/:id' />
         <Detail path='/detail/:id' />
       </Router>
+      <NavBar />
     </>
   )
 }

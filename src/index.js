@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
+import Context from './Context'
 
 // Implementacion de React Apollo:
 import ApolloClient from 'apollo-boost' // Forma rapida de inicializar react apollo.
@@ -14,8 +15,10 @@ const container = document.getElementById('app')
 
 // Al cubrir toda la aplicacion con el proveedor garantizamos que apollo tendra acceso a toda la App.
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <Context.Provider>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Context.Provider>,
   container
 )

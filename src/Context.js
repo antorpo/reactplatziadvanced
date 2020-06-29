@@ -14,7 +14,7 @@ import React, { createContext, useState } from 'react'
   Context -> Pasar propiedaades a diferentes componentes de un mismo arbol.
 */
 
-const Context = createContext()
+export const Context = createContext()
 const Provider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(() => {
     return window.sessionStorage.getItem('token')

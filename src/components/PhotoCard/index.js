@@ -45,7 +45,7 @@ export const PhotoCard = ({ id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
 
 // Para el caso de likes que es un numero, pero no un numero cualquiera sino positivo podemos
 // crear nuestro propia custom propType validation, usando funciones.
-PhotoCard.PropTypes = {
+PhotoCard.propTypes = {
   id: PropTypes.string.isRequired,
   liked: PropTypes.bool.isRequired,
   src: PropTypes.string.isRequired,

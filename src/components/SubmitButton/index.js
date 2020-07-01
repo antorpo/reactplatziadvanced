@@ -7,7 +7,7 @@ export const SubmitButton = ({ disabled, children, onClick }) => {
 }
 
 // .node (Cualquier cosa que React pueda renderizar como un componente, un numero o codigo JS, etc).
-SubmitButton.PropTypes = {
+SubmitButton.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired

@@ -15,7 +15,7 @@ export const ListFavs = ({ favs }) => {
 }
 
 // Indicamos que favs es un array que contiene objetos dentro:
-ListFavs.PropTypes = {
+ListFavs.propTypes = {
   favs: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

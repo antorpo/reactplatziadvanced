@@ -37,7 +37,7 @@ const useCategoriesData = () => {
   return { categories }
 }
 
-export const ListCategories = () => {
+const ListCategoriesComponent = () => {
   const { categories } = useCategoriesData()
   const [showFixed, setShowFixed] = useState(false)
 
@@ -80,3 +80,6 @@ export const ListCategories = () => {
     </>
   )
 }
+
+// React.memo nos permite renderizar el componente unicamente si sus props han cambiado, similar a PureComponent.
+export const ListCategories = React.memo(ListCategoriesComponent)
